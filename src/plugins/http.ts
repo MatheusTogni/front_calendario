@@ -17,7 +17,7 @@ async function HTTP(
   }
 
   try {
-    const response = await fetch(`http://localhost:3000/${url}`, config);
+    const response = await fetch(`https://back-calendario.vercel.app${url}`, config);
     const json = await response.json();
     if (!response.ok) throw new Error(json.message || "Erro na requisição");
     return json;
