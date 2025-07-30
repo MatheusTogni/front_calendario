@@ -60,8 +60,8 @@ export default defineConfig({
       registerType: 'autoUpdate',
       includeAssets: ['favicon.svg', 'robots.txt', 'apple-touch-icon.png'],
       manifest: {
-        name: 'Calendário Redime',
-        short_name: 'Redime',
+        name: 'Ministrações Redime',
+        short_name: 'Ministrações Redime',
         description: 'Calendário de Ministrações Redime',
         theme_color: '#6A1B9A',
         background_color: '#ffffff',
