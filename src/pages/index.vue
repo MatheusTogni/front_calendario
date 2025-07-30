@@ -464,8 +464,8 @@ export default defineComponent({
     },
   },
 
-  mounted() {
-    this.getEvents();
+  async mounted() {
+    await this.getEvents();
   },
 });
 </script>
