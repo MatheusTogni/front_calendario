@@ -348,7 +348,7 @@ export default defineComponent({
     openAddEventDialog(date) {
       this.newEvent = {
         name: "",
-        date: date,
+        date: moment(date).format("YYYY-MM-DD"),
         description: "",
         color: "",
         people: "",
@@ -393,7 +393,7 @@ export default defineComponent({
         this.events = resp.map((apiEvent) => ({
           id: apiEvent.ID_MINISTRACAO,
           name: apiEvent.TITULO_MINISTRACAO,
-          date: moment(apiEvent.DATA_MINISTRACAO).format("YYYY-MM-DD"),
+          date: moment(apiEvent.DATA_MINISTRACAO, "YYYY-MM-DD").format("YYYY-MM-DD"),
           description: apiEvent.DESCRICAO_MINISTRACAO,
           people: apiEvent.USER_MINISTRACAO || "",
           color: apiEvent.COR_MINISTRACAO,
@@ -409,10 +409,12 @@ export default defineComponent({
     },
 
     editSelectedEvent() {
-      this.editEvent = { ...this.selectedEvent };
+      this.editEvent = {
+        ...this.selectedEvent,
+        date: moment(this.selectedEvent.date, "YYYY-MM-DD").format("YYYY-MM-DD"),
+      };
       this.editEventDialog = true;
     },
-
     async confirmDeleteEvent() {
       try {
         this.loadingDelete = true;
