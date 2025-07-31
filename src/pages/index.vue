@@ -99,7 +99,7 @@
       <p class="text-subtitle-1 text-grey-darken-1">Nenhum evento escolhido ainda...</p>
     </v-sheet>
 
-    <v-dialog v-model="addEventDialog" max-width="500px">
+    <v-dialog persistent v-model="addEventDialog" max-width="500px">
       <v-card class="add-event-dialog-title" rounded="lg" elevation="8">
         <v-card-title class="text-h6 add-event-dialog-title">
           Novo Evento em {{ newEvent.date }}
@@ -160,7 +160,7 @@
         </v-card-actions>
       </v-card>
     </v-dialog>
-    <v-dialog v-model="editEventDialog" max-width="500px">
+    <v-dialog persistent v-model="editEventDialog" max-width="500px">
       <v-card class="add-event-dialog-title" rounded="lg" elevation="8">
         <v-card-title class="text-h6 add-event-dialog-title">
           Editar Ministração
@@ -221,7 +221,7 @@
         </v-card-actions>
       </v-card>
     </v-dialog>
-    <v-dialog v-model="confirmDeleteDialog" max-width="400px">
+    <v-dialog persistent v-model="confirmDeleteDialog" max-width="400px">
       <v-card class="add-event-dialog-title" rounded="lg" elevation="10">
         <v-card-title class="text-h6 py-4"> Confirmar Exclusão </v-card-title>
         <v-card-text class="text-subtitle-1 px-6">
