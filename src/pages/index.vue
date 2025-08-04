@@ -124,6 +124,7 @@
             :hint="descriptionCounter"
             persistent-hint
             maxlength="1000"
+            auto-grow
           ></v-textarea>
           <v-text-field
             v-model="newEvent.people"
@@ -190,6 +191,7 @@
             :hint="editDescriptionCounter"
             persistent-hint
             maxlength="1000"
+            auto-grow
           ></v-textarea>
           <v-text-field
             v-model="editEvent.people"
