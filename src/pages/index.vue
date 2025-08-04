@@ -255,7 +255,7 @@
       </v-card>
     </v-dialog>
     <v-dialog persistent v-model="viewDescriptionDialog" max-width="500px">
-      <v-card rounded="lg" elevation="8">
+      <v-card class="add-event-dialog-title" rounded="lg" elevation="8">
         <v-card-title class="text-h6 add-event-dialog-title">
           Descrição de {{ selectedEvent.name }}
         </v-card-title>
