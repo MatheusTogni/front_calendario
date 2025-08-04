@@ -674,6 +674,7 @@ export default defineComponent({
   color: #424242;
   font-size: 0.9rem;
   line-height: 1.5;
+  white-space: pre-wrap;
 }
 
 .event-details-text strong {
