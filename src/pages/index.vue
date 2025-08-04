@@ -69,7 +69,6 @@
       }}</v-card-title>
       <v-card-text class="event-details-text">
         <p class="mb-2"><strong>Data:</strong> {{ selectedEvent.date }}</p>
-        <p><strong>Descrição:</strong> {{ selectedEvent.description }}</p>
         <p v-if="selectedEvent.people">
           <strong>Pessoas:</strong> {{ selectedEvent.people }}
         </p>
@@ -82,6 +81,9 @@
             @click="editSelectedEvent"
           >
             <v-icon>mdi-pencil</v-icon>
+          </v-btn>
+          <v-btn class="mr-8" icon color="#43B446" @click="viewDescription">
+            <v-icon>mdi-eye</v-icon>
           </v-btn>
           <v-btn icon color="red-darken-2" @click="deleteSelectedEvent">
             <v-icon>mdi-delete</v-icon>
@@ -119,12 +121,17 @@
             density="compact"
             rows="3"
             class="mb-3"
+            :hint="descriptionCounter"
+            persistent-hint
+            maxlength="1000"
           ></v-textarea>
           <v-text-field
             v-model="newEvent.people"
             label="Pessoas Selecionadas"
             variant="outlined"
             density="compact"
+            counter="200"
+            maxlength="200"
           ></v-text-field>
           <v-select
             v-model="newEvent.color"
@@ -180,6 +187,9 @@
             density="compact"
             rows="3"
             class="mb-3"
+            :hint="editDescriptionCounter"
+            persistent-hint
+            maxlength="1000"
           ></v-textarea>
           <v-text-field
             v-model="editEvent.people"
@@ -244,6 +254,25 @@
         </v-card-actions>
       </v-card>
     </v-dialog>
+    <v-dialog persistent v-model="viewDescriptionDialog" max-width="500px">
+      <v-card rounded="lg" elevation="8">
+        <v-card-title class="text-h6 add-event-dialog-title">
+          Descrição de {{ selectedEvent.name }}
+        </v-card-title>
+        <v-card-text class="event-details-text">
+          {{ selectedEvent.description }}
+        </v-card-text>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn
+            variant="flat"
+            color="deep-purple-darken-2"
+            @click="viewDescriptionDialog = false"
+            >Fechar</v-btn
+          >
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
   </v-container>
 </template>
 
@@ -259,6 +288,7 @@ export default defineComponent({
   data() {
     return {
       loadingSalvar: false,
+      viewDescriptionDialog: false,
       loadingEdit: false,
       loadingDelete: false,
       currentDate: moment(),
@@ -303,6 +333,16 @@ export default defineComponent({
       const formattedDate = formatter.format(this.currentDate.toDate());
       return formattedDate.charAt(0).toUpperCase() + formattedDate.slice(1);
     },
+    descriptionCounter() {
+      const charCount = this.newEvent.description ? this.newEvent.description.length : 0;
+      return `${charCount} / 1000`;
+    },
+    editDescriptionCounter() {
+      const charCount = this.editEvent.description
+        ? this.editEvent.description.length
+        : 0;
+      return `${charCount} / 1000`;
+    },
     calendarWeeks() {
       const startOfMonth = this.currentDate.clone().startOf("month");
       const endOfMonth = this.currentDate.clone().endOf("month");
@@ -329,6 +369,10 @@ export default defineComponent({
     },
   },
   methods: {
+    viewDescription() {
+      this.viewDescriptionDialog = true;
+    },
+
     previousMonth() {
       this.currentDate = this.currentDate.clone().subtract(1, "month");
       this.selectedEvent = {};
